@@ -55,7 +55,7 @@ async function patchDish(req, res) {
         return res.status(404).send('Dish not found');
     }
 
-    const { name, image, category, label, price, featured, description, comments } = req.body;
+    const { name, image, category, label, price, featured, description } = req.body;
 
     dish.name = name;
     dish.image = image;
@@ -64,7 +64,6 @@ async function patchDish(req, res) {
     dish.price = price;
     dish.featured = featured;
     dish.description = description;
-    dish.comments = comments;
 
     await dish.save();
     res.json(dish);
@@ -164,7 +163,7 @@ async function deleteComment(req, res) {
             return res.status(404).json({ error: "Dish not found" });
         }
 
-        res.json({ message: 'Comment deleted successfully', dish: updatedDish });
+        res.send('Comment deleted');
     } catch (error) {
         res.status(500).json({ error: 'Internal server error' });
     }
